@@ -1,12 +1,18 @@
-import React from 'react';
+import './App.css';
+import Users from "./components/Users";
+import Posts from "./components/Posts";
+import Comments from "./components/Comments";
 
-import "./App.css"
-const App = () => {
-  return (
-      <div>
-
-      </div>
-  );
-};
+function App() {
+    return (
+        <div>
+            <div className={'d-flex'}>
+                <Users/>
+                <Posts/>
+            </div>
+            <Comments/>
+        </div>
+    )
+}
 
 export default App;
