@@ -1,38 +1,35 @@
-import React from 'react';
-import {useState, useEffect} from "react";
-
-import "./App.css"
-import css from "./App.module.css"
-import cssBlock from "./components/components.module.css"
+import React, {useEffect, useState} from 'react';
+import Form from './components/Form/Form'
 import Users from "./components/Users/Users";
-import UserDetails from "./components/UserDetails/UserDetails"
-import Posts from "./components/Posts/Posts";
-
-
+import {userService} from "./services/user.service";
 const App = () => {
-    const [user, setUser] = useState(null)
-    const [userId, setUserId] = useState(null)
-
-
-    const getUser = (user) => {
-        setUser(user)
-        setUserId(null)
-    };
-    
-    const getUserId = (id) => {
-      setUserId(id)
+    const [users, setUsers] = useState([])
+    const [filteredUsers, setFilteredUsers] = useState([])
+    useEffect(()=>{
+        userService.getAll().then(value=>{
+            setUsers([...value])
+            setFilteredUsers([...value])
+        })
+    },[])
+    const getFilter = (data) => {
+let filteredArr = [...users]
+        if (data.name){
+            filteredArr = filteredArr.filter(user => user.name.toLowerCase().includes(data.name.toLowerCase()) )
+        }
+        if (data.username){
+            filteredArr = filteredArr.filter(user => user.username.toLowerCase().includes(data.username.toLowerCase()) )
+        }
+        if (data.email){
+            filteredArr = filteredArr.filter(user => user.email.toLowerCase().includes(data.email.toLowerCase()) )
+        }
+        setFilteredUsers(filteredArr)
     }
-
     return (
         <div>
-            <div  className={css.wrap}>
-                <div className={cssBlock.block}><Users getUser={getUser}/></div>
-                <div className={cssBlock.block}>{user&&<UserDetails user={user} getUserId={getUserId}/>}</div>
-            </div>
-            <div className={cssBlock.block}>{userId && <Posts userId={userId}/>}</div>
+            <Form getFilter={getFilter}/>
+            <Users users={filteredUsers}/>
         </div>
-    )
-        ;
+    );
 };
 
 export default App;
