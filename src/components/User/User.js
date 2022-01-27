@@ -8,7 +8,9 @@ const User = ({user}) => {
         <div className={css.users_block}>
 
             <Link to={id.toString()} state={user} >Name: {name}</Link>
-
+            <Link to={id.toString() + '/albums'}>
+                <button>User albums</button>
+            </Link>
         </div>
     );
 };

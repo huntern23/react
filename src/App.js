@@ -8,6 +8,8 @@ import SinglePostPage from "./pages/SinglePostPage/SinglePostPage";
 import SingleUserPage from "./pages/SingleUserPage/SingleUserPage";
 import {UserPostsPage} from "./pages/UserPostsPage/UserPostsPage";
 import {CommentsPage} from "./pages/CommentsPage/CommentsPage";
+import {AlbumsPage} from "./pages/AlbumsPage/AlbumsPage";
+import {PhotosPage} from "./pages/PhotosPage/PhotosPage";
 
 
 const App = () => {
@@ -20,7 +22,11 @@ const App = () => {
                         <Route path={":id"} element={<SingleUserPage/>}>
                         <Route path={'userPosts'} element={<UserPostsPage/>}/>
                         </Route>
+                        <Route path={':id/albums'} element={<AlbumsPage/>}>
+                            <Route path={':albumId/photos'} element={<PhotosPage/>}/>
+                        </Route>
                     </Route>
+
                     <Route path={"/posts"} element={<PostsPage/>}>
                         <Route path={":id"} element={<SinglePostPage/>}>
                             <Route path={'comments'} element={<CommentsPage/>}/>
