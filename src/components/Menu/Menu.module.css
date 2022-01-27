@@ -1,0 +1,13 @@
+.text{
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 20px;
+
+}
+.active{
+    color: red;
+    text-decoration: underline;
+    
+}
